@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+
+	<script>
+		window.onload = function(){
+			document.querySelector('h1 input').addEventListener('keydown' , searchId)
+
+			function searchId(e) {
+				if(e.keyCode == 13) {
+					let url = `https://api.github.com/users/${this.value}`
+					fetch(url)
+					.then( res => res.json() )
+					.then( res => {
+						document.querySelector('.followers').innerHTML = res.followers
+						document.querySelector('.repository').innerHTML = res.public_repos
+						document.querySelector('.following').innerHTML = res.following
+						document.querySelector('img').setAttribute('src' , 'https://avatars2.githubusercontent.com/u/47956193?v=4')
+					})
+				}
+			}
+			
+		}
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<h1><input type="text"></h1>
+		<div>
+			<img src="" alt="">
+			<p class="userName"></p>
+		</div>
+		<ul>
+			<li class="followers"></li>
+			<li class="repository"></li>
+			<li class="following"></li>
+		</ul>
+	</div>
+	
+</body>
+</html>
